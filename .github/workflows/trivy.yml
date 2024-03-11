@@ -22,8 +22,8 @@ jobs:
         hide-progress: false
         format: 'json'
         output: 'trivy-results.json'
-        #exit-code: '1'
-        #ignore-unfixed: true
+        exit-code: '0'
+        ignore-unfixed: true
         severity: 'CRITICAL,HIGH'
 
     - name: 'Upload Artifact: trivy scan results'
