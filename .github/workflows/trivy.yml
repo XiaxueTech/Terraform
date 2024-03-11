@@ -1,0 +1,40 @@
+name: Go CLI Test
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  pull-requests: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run Trivy vulnerability scanner in IaC mode
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'config'
+        hide-progress: false
+        format: 'json'
+        output: 'trivy-results.json'
+        #exit-code: '1'
+        #ignore-unfixed: true
+        severity: 'CRITICAL,HIGH'
+
+    - name: 'Upload Artifact: trivy scan results'
+      uses: actions/upload-artifact@v4
+      with:
+        name: trivy-scan-results
+        path: trivy-results.json
+        retention-days: 5
+
+    - name: Run Go CLI Test
+      uses: XiaxueTech/trivy-pr-commenter@main
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        report_file: trivy-results.json
