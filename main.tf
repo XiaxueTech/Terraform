@@ -1,4 +1,4 @@
-data "aws_vpc" "test1" {
+data "aws_vpc" "test" {
     default = true
 }
 
