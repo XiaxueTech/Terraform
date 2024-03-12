@@ -39,7 +39,7 @@ jobs:
         retention-days: 5
 
     - name: Run Go CLI Test
-      uses: XiaxueTech/trivy-pr-commenter@main
+      uses: XiaxueTech/trivy-pr-commenter@v0.1.12
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         report_file: trivy-results.json
