@@ -1,6 +1,6 @@
 resource "aws_security_group" "egress" {
     name        = "test"
-    description = "Allow inbound"
+    description = "Allow outbound"
     vpc_id      = data.aws_vpc.ingress.id
 }
 
@@ -13,7 +13,7 @@ resource "aws_security_group_rule" "egress" {
     security_group_id = "${aws_security_group.egress.id}"
 }
 
-resource "aws_security_group_rule" "egress" {
+resource "aws_security_group_rule" "egress_2" {
     type        = "egress"
     from_port   = 0
     to_port     = 65535
