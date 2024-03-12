@@ -34,7 +34,7 @@ jobs:
         retention-days: 5
 
     - name: Run Trivy PR Commenter
-      uses: XiaxueTech/trivy-pr-commenter@v0.1.12
+      uses: XiaxueTech/trivy-pr-commenter@main
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         report_file: trivy-results.json
