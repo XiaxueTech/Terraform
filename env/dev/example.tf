@@ -1,4 +1,4 @@
-esource "aws_security_group" "example_sg_1" {
+resource "aws_security_group" "example_sg_1" {
   name        = "example-sg-1"
   description = "Example security group"
 
