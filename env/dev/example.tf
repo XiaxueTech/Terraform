@@ -8,6 +8,7 @@ esource "aws_security_group" "example_sg_1" {
     protocol    = "tcp"
     cidr_blocks = ["10.0.0.0/16"]
   }
+}
 
   resource "aws_security_group" "example_sg_2" {
   name        = "example-sg-2"
@@ -19,3 +20,4 @@ esource "aws_security_group" "example_sg_1" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
