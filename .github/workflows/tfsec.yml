@@ -1,29 +1,35 @@
 ---
-    name: Security Checks
-    
-    on:
-      push:
-        branches:
-          - master
-      pull_request:
-        branches:
-          - master
-    
-    permissions:
-      pull-requests: write
-    
-    jobs:
-      tfsec:
-        name: tfsec PR commenter
-        runs-on: ubuntu-latest
-    
-        steps:
-          - uses: actions/checkout@v3
-    
-          - name: Run TFsec
-            uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
-            with:
-              soft_fail_commenter: true
-              working_directory: ''
-              tfsec_args: --soft-fail --concise-output --include-passed --minimum-severity MEDIUM
-              github_token: ${{ github.token }}
+name: Security Checks
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  pull-requests: write
+
+jobs:
+  tfsec:
+    name: tfsec PR commenter
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run TFsec
+        uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
+        with:
+          soft_fail_commenter: true
+          working_directory: ''
+          tfsec_args: --soft-fail --concise-output --include-passed --minimum-severity MEDIUM
+          github_token: ${{ github.token }}
+
+      - name: Upload tfsec scan results
+        uses: actions/upload-artifact@v2
+        with:
+          name: tfsec-scan-results
+          path: tfsec-results.json
